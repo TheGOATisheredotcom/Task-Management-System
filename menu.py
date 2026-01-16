@@ -1,0 +1,12 @@
+def display_menu():
+    print("Task Management System")
+    print("1. Add Task")
+    print("2. List Tasks")
+    print("3. Mark Task as Complete")
+    print("4. Check Overdue Tasks")
+    print("5. View Tasks by Category")
+    print("6. View Tasks by Due Date")
+    print("7. View Tasks by Priority")
+    print("8. Delete Completed Tasks")
+    print("9. Export Tasks to CSV")
+    print("10. Exit")
