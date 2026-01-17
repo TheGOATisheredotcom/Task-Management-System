@@ -48,8 +48,14 @@ class TaskManager:
             print("No tasks available.")
             return
         for idx, task in enumerate(self.tasks, 1):
+            # If the task is a dictionary, use dictionary syntax
+            if isinstance(task, dict):
+                print(f"{idx}. [!] ERROR: This task is a dictionary: {task['description']}")
+                continue
+        
+            # If the task is an object, use dot notation
             print(f"{idx}. {task.description} | Category: {task.category} | Due: {task.due_date} | Priority: {task.priority} | Status: {task.status}")
-    
+            
     def mark_task_complete(self):
         self.list_tasks()
         choice = int(input("Enter the number of the task to mark as complete: "))
@@ -91,7 +97,8 @@ class TaskManager:
         for task in filtered_tasks:
             print(f"- {task.description} | Category: {task.category} | Status: {task.status}")
 
-    def view_by_priority(self, priority):
+    def view_by_priority(self):
+        priority = self.select_priority()
         filtered_tasks = [task for task in self.tasks if task.priority == priority]
         if not filtered_tasks:
             print(f"No tasks found with priority: {priority}")

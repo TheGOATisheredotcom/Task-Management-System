@@ -2,7 +2,7 @@ import os
 
 from task import Task
 from task_manager import TaskManager
-from storage import load_file, save_file
+from storage import load_file, save_file, export_to_csv
 from menu import display_menu
 
 # Initialize the global manager object to handle business logic
@@ -85,7 +85,8 @@ def main():
 
         elif choice == '9':
             refresh_screen()
-            manager.export_tasks_to_csv()
+            task_dicts = [t.to_dict() for t in manager.tasks]
+            export_to_csv(task_dicts)
             pause()
 
         elif choice == '10':

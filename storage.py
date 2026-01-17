@@ -9,7 +9,7 @@ def load_file():
         with open(file_n, 'r') as file:
             return js.load(file)
     except (FileNotFoundError, js.JSONDecodeError):
-        return []
+        return {"tasks": []}
     
 def save_file(tasks):
     try:
@@ -25,6 +25,14 @@ def export_to_csv(tasks, filename="tasks.csv"):
             writer = csv.writer(file)
             writer.writerow(["Description", "Category", "Due Date", "Priority", "Status"])
             for task in tasks:
-                writer.writerow([task.description, task.category, task.due_date, task.priority, task.status])
+                # Use brackets [] because 'task' is now a dictionary
+                writer.writerow([
+                    task["description"], 
+                    task["category"], 
+                    task["due_date"], 
+                    task["priority"], 
+                    task["status"]
+                ])
+        print(f"Successfully exported to {filename}")
     except Exception as e:
         print(f"Error exporting to CSV: {e}")
